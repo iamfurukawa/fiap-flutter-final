@@ -7,7 +7,7 @@ import 'package:shopping_list/screens/shopping_list/domain/utils/domain_errors.d
 
 class ShoppingListServiceImpl implements ShoppingListService {
 
-  final userId = FirebaseAuth.instance.currentUser!.uid;
+  final userId = FirebaseAuth.instance.currentUser?.uid;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   final String collectionPath = 'users';
@@ -31,7 +31,7 @@ class ShoppingListServiceImpl implements ShoppingListService {
     DocumentReference userRef = firestore.collection(collectionPath)
         .doc(userId);
 
-    var userDataJSON = ShoppingListModel.fromEntity(shoppingList, userId).toJson();
+    var userDataJSON = ShoppingListModel.fromEntity(shoppingList, userId!).toJson();
 
     try {
       await userRef.set(userDataJSON, SetOptions(merge: true));
