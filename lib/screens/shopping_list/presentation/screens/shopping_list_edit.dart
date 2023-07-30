@@ -18,7 +18,7 @@ class ShoppingListEdit extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Shopping List Edit"),
+            title: const Text("Editar Item"),
             backgroundColor: ColorsSystem.background,
             leading: IconButton(
               onPressed: () => Navigator.pushReplacementNamed(context, ShoppingListContainer.routeName),
