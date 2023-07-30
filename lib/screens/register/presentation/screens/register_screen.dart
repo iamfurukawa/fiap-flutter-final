@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:shopping_list/screens/register/presentation/bloc/register_cubit.dart';
-import 'package:shopping_list/screens/sign_in/presentation/bloc/sign_in_cubit.dart';
 import 'package:shopping_list/screens/sign_in/presentation/container/sign_in_container.dart';
 import 'package:shopping_list/shared/colors_system.dart';
 
@@ -87,6 +85,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {
+                if (_passwordController.text.isEmpty || _emailController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: Colors.red,
+                      content: Text(
+                        'Por favor, preencha os campos corretamente.',
+                      ),
+                    ),
+                  );
+
+                  return;
+                }
+
                 context.read<RegisterCubit>().register(_passwordController.text, _emailController.text);
               },
               child: const Text('Cadastrar'),

@@ -63,6 +63,19 @@ class SignInScreen extends StatelessWidget {
             const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {
+                if (_passwordController.text.isEmpty || _emailController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: Colors.red,
+                      content: Text(
+                        'Por favor, preencha os campos corretamente.',
+                      ),
+                    ),
+                  );
+
+                  return;
+                }
+
                 context.read<SignInCubit>()
                     .signIn(_passwordController.text, _emailController.text);
               },

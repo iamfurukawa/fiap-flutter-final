@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_list/screens/shopping_list/presentation/bloc/shopping_list_cubit.dart';
@@ -7,9 +6,8 @@ import 'package:shopping_list/screens/sign_in/presentation/container/sign_in_con
 import 'package:shopping_list/shared/colors_system.dart';
 
 class ShoppingListScreen extends StatelessWidget {
-  final TextEditingController _textFieldController = TextEditingController();
 
-  ShoppingListScreen({super.key});
+  const ShoppingListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

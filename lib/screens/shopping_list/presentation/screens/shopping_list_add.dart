@@ -52,6 +52,19 @@ class ShoppingListAdd extends StatelessWidget {
                 const SizedBox(height: 32),
                 ElevatedButton(
                   onPressed: () {
+                    if (_newItem.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text(
+                            'Por favor, preencha o nome do item.',
+                          ),
+                        ),
+                      );
+
+                      return;
+                    }
+
                     context.read<ShoppingListCubit>().add(_newItem.text);
                   },
                   child: const Text('Cadastrar'),

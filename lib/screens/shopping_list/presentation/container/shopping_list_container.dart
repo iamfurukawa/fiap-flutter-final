@@ -14,7 +14,7 @@ class ShoppingListContainer extends BlocBuilder<ShoppingListCubit, ShoppingListC
     builder: (context, state) {
       switch (state.status) {
         case ShoppingListCubitStateStatus.ok:
-          return ShoppingListScreen();
+          return const ShoppingListScreen();
         case ShoppingListCubitStateStatus.newItem:
           return ShoppingListAdd();
         case ShoppingListCubitStateStatus.editItem:

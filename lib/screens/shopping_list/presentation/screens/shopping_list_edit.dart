@@ -58,6 +58,19 @@ class ShoppingListEdit extends StatelessWidget {
                     foregroundColor: MaterialStatePropertyAll(Colors.black),
                   ),
                   onPressed: () {
+                    if (_editItem.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text(
+                            'Por favor, preencha o nome do item.',
+                          ),
+                        ),
+                      );
+
+                      return;
+                    }
+
                     context.read<ShoppingListCubit>().edit(_editItem.text, state.shoppingItem!.uuid);
                   },
                   child: const Text('Salvar'),
