@@ -1,7 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_list/screens/shopping_list/presentation/bloc/shopping_list_cubit.dart';
 import 'package:shopping_list/screens/shopping_list/presentation/bloc/shopping_list_cubit_state.dart';
+import 'package:shopping_list/screens/sign_in/presentation/container/sign_in_container.dart';
+import 'package:shopping_list/shared/colors_system.dart';
 
 class ShoppingListScreen extends StatelessWidget {
   final TextEditingController _textFieldController = TextEditingController();
@@ -22,31 +25,41 @@ class ShoppingListScreen extends StatelessWidget {
           ),
           appBar: AppBar(
             title: const Text("Shopping List"),
-            backgroundColor: Colors.transparent,
+            backgroundColor: ColorsSystem.background,
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, SignInContainer.routeName);
+              },
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.black,
+              ),
+            ),
           ),
-          backgroundColor: Colors.white70,
-          body: ListView.builder(
-            itemCount: state.shoppingList.items.length,
-            itemBuilder: (context, index) {
-              final item = state.shoppingList.items[index];
+          backgroundColor: ColorsSystem.background,
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: ListView.builder(
+              itemCount: state.shoppingList.items.length,
+              itemBuilder: (context, index) {
+                final item = state.shoppingList.items[index];
 
-              return ListTile(
-                onLongPress: () {
-                  context.read<ShoppingListCubit>().goToEdit(item.uuid);
-                },
-                onTap: () {
-                  context.read<ShoppingListCubit>().toogleMark(item.uuid);
-                },
-                title: Text(
-                  item.name,
-                  style: TextStyle(
-                    decoration: item.check == true
-                        ? TextDecoration.lineThrough
-                        : TextDecoration.none,
+                return ListTile(
+                  onLongPress: () {
+                    context.read<ShoppingListCubit>().goToEdit(item.uuid);
+                  },
+                  onTap: () {
+                    context.read<ShoppingListCubit>().toogleMark(item.uuid);
+                  },
+                  title: Text(
+                    item.name,
+                    style: TextStyle(
+                      decoration: item.check == true ? TextDecoration.lineThrough : TextDecoration.none,
+                    ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         );
       },

@@ -91,7 +91,6 @@ class ShoppingListCubit extends Cubit<ShoppingListCubitState> {
   }
 
   void toogleMark(String uuid) {
-    print(uuid);
     try {
       var updatedItems = state.shoppingList.items.map((item) {
         if (item.uuid == uuid) item.check = !item.check;

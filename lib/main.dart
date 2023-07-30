@@ -31,10 +31,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigoAccent),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromRGBO(20, 15, 71, 1)),
         useMaterial3: true,
       ),
-      initialRoute: ShoppingListContainer.routeName,
+      initialRoute: SignInContainer.routeName,
       routes: {
         RegisterContainer.routeName: (_) => RegisterCubitProvider(child: RegisterContainer()),
         ShoppingListContainer.routeName: (_) => ShoppingListCubitProvider(child: ShoppingListContainer()),

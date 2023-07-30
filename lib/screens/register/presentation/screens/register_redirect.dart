@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_list/shared/colors_system.dart';
 
 class RegisterRedirect extends StatelessWidget {
   final String? route;
@@ -14,13 +15,13 @@ class RegisterRedirect extends StatelessWidget {
     });
 
     return Scaffold(
-      backgroundColor: Colors.teal,
+      backgroundColor: ColorsSystem.background,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: ColorsSystem.background,
       ),
       body: const Center(
         child: CircularProgressIndicator(
-          color: Colors.white,
+          color: Colors.black,
         ),
       ),
     );
