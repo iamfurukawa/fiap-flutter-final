@@ -1,0 +1,6 @@
+repositório: https://github.com/iamfurukawa/fiap-flutter-final
+documentação: https://github.com/iamfurukawa/fiap-flutter-final/wiki
+
+Alunos:
+Michelle de Araujo Sinibaldi - 346502
+Vinicius Furukawa Carvalho - 346154
