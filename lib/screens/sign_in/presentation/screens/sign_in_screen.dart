@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopping_list/screens/sign_in/presentation/bloc/sign_in_cubit.dart';
 
 class SignInScreen extends StatelessWidget {
 
   SignInScreen({Key? key}) : super(key: key);
 
-  var email;
-  var password;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class SignInScreen extends StatelessWidget {
           const SizedBox(height: 32),
           TextField(
             keyboardType: TextInputType.emailAddress,
+            controller: _emailController,
             decoration: InputDecoration(
               labelText: 'Email',
               focusedBorder: OutlineInputBorder(
@@ -33,13 +36,11 @@ class SignInScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
               ),
             ),
-            onChanged: (newEmail) {
-              email = newEmail;
-            },
           ),
           const SizedBox(height: 32),
           TextField(
             obscureText: true,
+            controller: _passwordController,
             keyboardType: TextInputType.name,
             decoration: InputDecoration(
               labelText: 'Senha',
@@ -54,13 +55,12 @@ class SignInScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
               ),
             ),
-            onChanged: (newPassword) {
-              password = newPassword;
-            },
           ),
           const SizedBox(height: 32),
           ElevatedButton(
-            onPressed: () => {},
+            onPressed: () {
+              context.read<SignInCubit>().signIn(_passwordController.text, _emailController.text);
+            },
             child: const Text('Entrar'),
           ),
         ],

@@ -21,10 +21,10 @@ class SignInCubit extends Cubit<SignInCubitState> {
     ));
   }
 
-  void signIn(String email, String password) {
+  void signIn(String email, String password) async {
     try {
       var user = SignInEntity(email: email, password: password);
-      signInService.signIn(user);
+      await signInService.signIn(user);
       emit(state.copyWith(
           status: SignInCubitStateStatus.logged,
       ));

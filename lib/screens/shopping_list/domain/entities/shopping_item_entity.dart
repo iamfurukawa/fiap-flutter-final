@@ -1,7 +1,7 @@
 import 'package:uuid/uuid.dart';
 
 class ShoppingItemEntity {
-  final String name;
+  String name;
   bool check;
   String uuid;
 

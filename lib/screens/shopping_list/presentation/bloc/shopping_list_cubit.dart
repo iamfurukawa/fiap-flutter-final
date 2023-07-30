@@ -6,7 +6,7 @@ import 'package:shopping_list/screens/shopping_list/domain/entities/shopping_ite
 import 'package:shopping_list/screens/shopping_list/domain/entities/shopping_list_entity.dart';
 import 'package:shopping_list/screens/shopping_list/domain/use_cases/shopping_list_service.dart';
 import 'package:shopping_list/screens/shopping_list/presentation/bloc/shopping_list_cubit_state.dart';
-import 'package:shopping_list/screens/sign_in/domain/utils/domain_errors.dart';
+import 'package:shopping_list/screens/shopping_list/domain/utils/domain_errors.dart';
 
 class ShoppingListCubit extends Cubit<ShoppingListCubitState> {
   ShoppingListService shoppingListService;
@@ -39,8 +39,8 @@ class ShoppingListCubit extends Cubit<ShoppingListCubitState> {
   void add(String name) async {
     try {
       var newItem = ShoppingItemEntity(name: name);
-      state.shoppingList.items.add(newItem);
-      var updatedShoppingList = await shoppingListService.save(state.shoppingList);
+      var newList = ShoppingListEntity(items: [...state.shoppingList.items, newItem]);
+      var updatedShoppingList = await shoppingListService.save(newList);
 
       emit(state.copyWith(
         shoppingList: updatedShoppingList,
@@ -53,21 +53,74 @@ class ShoppingListCubit extends Cubit<ShoppingListCubitState> {
     }
   }
 
-  void toogleMark(String uuid) {
+  void delete(String uuid) async {
     try {
-      state.shoppingList.items.map((item) {
-        if (item.uuid == uuid) item.check = !item.check;
-        return item;
-      });
+      var updatedItems = [...state.shoppingList.items];
+      updatedItems.removeWhere((item) => item.uuid == uuid);
 
       emit(state.copyWith(
         status: ShoppingListCubitStateStatus.ok,
+        shoppingList: ShoppingListEntity(items: updatedItems),
       ));
     } on DomainError catch (error) {
       emit(state.copyWith(
           status: ShoppingListCubitStateStatus.error,
           error: error.description));
     }
+  }
+
+  void edit(String newName, String uuid) async {
+    try {
+      var updatedItems = [...state.shoppingList.items];
+      updatedItems = updatedItems.map((item) {
+        if(item.uuid == uuid) {
+          item.name = newName;
+        }
+        return item;
+      }).toList();
+
+      emit(state.copyWith(
+        status: ShoppingListCubitStateStatus.ok,
+        shoppingList: ShoppingListEntity(items: updatedItems),
+      ));
+    } on DomainError catch (error) {
+      emit(state.copyWith(
+          status: ShoppingListCubitStateStatus.error,
+          error: error.description));
+    }
+  }
+
+  void toogleMark(String uuid) {
+    print(uuid);
+    try {
+      var updatedItems = state.shoppingList.items.map((item) {
+        if (item.uuid == uuid) item.check = !item.check;
+        return item;
+      })
+      .toList();
+
+      emit(state.copyWith(
+        status: ShoppingListCubitStateStatus.ok,
+        shoppingList: ShoppingListEntity(items: updatedItems),
+      ));
+    } on DomainError catch (error) {
+      emit(state.copyWith(
+          status: ShoppingListCubitStateStatus.error,
+          error: error.description));
+    }
+  }
+
+  void goToEdit(String uuid) {
+    emit(state.copyWith(
+      status: ShoppingListCubitStateStatus.editItem,
+      shoppingItem: state.shoppingList.items.firstWhere((item) => item.uuid == uuid)
+    ));
+  }
+
+  void goToAdd() {
+    emit(state.copyWith(
+      status: ShoppingListCubitStateStatus.newItem,
+    ));
   }
 }
 
@@ -77,11 +130,9 @@ class ShoppingListCubitProvider extends BlocProvider<ShoppingListCubit> {
     Widget? child,
   }) : super(
     key: key,
-    create: (_) =>
-    ShoppingListCubit(
+    create: (_) => ShoppingListCubit(
       shoppingListService: GetIt.instance<ShoppingListService>(),
-    )
-      ..onInit(),
+    )..onInit(),
     child: child,
   );
 

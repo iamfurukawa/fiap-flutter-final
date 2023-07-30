@@ -6,7 +6,6 @@ import 'package:shopping_list/screens/register/presentation/container/register_c
 import 'package:shopping_list/screens/register/register_service_locator.dart';
 import 'package:shopping_list/screens/shopping_list/presentation/bloc/shopping_list_cubit.dart';
 import 'package:shopping_list/screens/shopping_list/presentation/container/shopping_list_container.dart';
-import 'package:shopping_list/screens/shopping_list/presentation/screens/shopping_list_screen.dart';
 import 'package:shopping_list/screens/shopping_list/shopping_list_service_locator.dart';
 import 'package:shopping_list/screens/sign_in/presentation/bloc/sign_in_cubit.dart';
 import 'package:shopping_list/screens/sign_in/presentation/container/sign_in_container.dart';
@@ -35,7 +34,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigoAccent),
         useMaterial3: true,
       ),
-      initialRoute: ShoppingListScreen.routeName,
+      initialRoute: ShoppingListContainer.routeName,
       routes: {
         RegisterContainer.routeName: (_) => RegisterCubitProvider(child: RegisterContainer()),
         ShoppingListContainer.routeName: (_) => ShoppingListCubitProvider(child: ShoppingListContainer()),

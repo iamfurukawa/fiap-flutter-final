@@ -5,7 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:shopping_list/screens/register/domain/entities/register_entity.dart';
 import 'package:shopping_list/screens/register/domain/use_cases/register_service.dart';
 import 'package:shopping_list/screens/register/presentation/bloc/register_cubit_state.dart';
-import 'package:shopping_list/screens/sign_in/domain/utils/domain_errors.dart';
+import 'package:shopping_list/screens/register/domain/utils/domain_errors.dart';
 
 class RegisterCubit extends Cubit<RegisterCubitState> {
   RegisterService registerService;
@@ -21,10 +21,10 @@ class RegisterCubit extends Cubit<RegisterCubitState> {
     ));
   }
 
-  void signIn(String email, String password) {
+  void register(String email, String password) async {
     try {
       var user = RegisterEntity(email: email, password: password);
-      registerService.register(user);
+      await registerService.register(user);
       emit(state.copyWith(
         status: RegisterCubitStateStatus.register,
       ));
