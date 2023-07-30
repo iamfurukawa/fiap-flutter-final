@@ -1,16 +1,8 @@
-# shopping_list
+# Shopping List Project
 
-A smart shopping list.
+Um gerenciador de items de compra feito em Flutter como trabalho final da disciplina de Flutter da turma 1MOBR.
 
-## Getting Started
+## Documentação
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Para mais informações acesse a nossa wiki:
+https://github.com/iamfurukawa/fiap-flutter-final/wiki
