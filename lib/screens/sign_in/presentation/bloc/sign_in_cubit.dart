@@ -6,6 +6,7 @@ import 'package:shopping_list/screens/sign_in/domain/entities/sign_in_entity.dar
 import 'package:shopping_list/screens/sign_in/domain/use_cases/sign_in_service.dart';
 import 'package:shopping_list/screens/sign_in/domain/utils/domain_errors.dart';
 import 'package:shopping_list/screens/sign_in/presentation/bloc/sign_in_cubit_state.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignInCubit extends Cubit<SignInCubitState> {
   SignInService signInService;
@@ -16,9 +17,19 @@ class SignInCubit extends Cubit<SignInCubitState> {
 
   void onInit() async {
     FlutterNativeSplash.remove();
+    final user = FirebaseAuth.instance.currentUser;
+
+    if(user == null) {
+      emit(state.copyWith(
+        status: SignInCubitStateStatus.ok,
+      ));
+      return;
+    }
+
     emit(state.copyWith(
-      status: SignInCubitStateStatus.ok,
+      status: SignInCubitStateStatus.logged,
     ));
+
   }
 
   void signIn(String email, String password) async {

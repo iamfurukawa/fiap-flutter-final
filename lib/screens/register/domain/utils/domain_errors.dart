@@ -1,19 +1,22 @@
 enum DomainError {
-  notFound,
-  timeOut,
-  serverError,
-  unexpected;
+  weakPassword,
+  invalidEmail,
+  operationNotAllowed,
+  emailAlreadyInUse,
+  failedToCreateUser;
 
   String get description {
     switch (this) {
-      case DomainError.notFound:
-        return 'Url não existe';
-      case DomainError.timeOut:
-        return 'Tempo de conexão esgotado';
-      case DomainError.serverError:
-        return 'Falha no servidor';
+      case DomainError.weakPassword:
+        return 'Senha muito fraca!';
+      case DomainError.invalidEmail:
+        return 'Email inválido!';
+      case DomainError.operationNotAllowed:
+        return 'Operação não permitida!';
+      case DomainError.emailAlreadyInUse:
+        return 'Email já em uso!';
       default:
-        return 'Erro desconhecido';
+        return 'Erro ao criar usuário!';
     }
   }
 }

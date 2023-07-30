@@ -1,19 +1,22 @@
 enum DomainError {
-  notFound,
-  timeOut,
-  serverError,
-  unexpected;
+  userDisabled,
+  invalidEmail,
+  userNotFound,
+  wrongPassword,
+  failedToSignIn;
 
   String get description {
     switch (this) {
-      case DomainError.notFound:
-        return 'Url não existe';
-      case DomainError.timeOut:
-        return 'Tempo de conexão esgotado';
-      case DomainError.serverError:
-        return 'Falha no servidor';
+      case DomainError.userDisabled:
+        return 'Usuário inativo!';
+      case DomainError.invalidEmail:
+        return 'Email inválido!';
+      case DomainError.userNotFound:
+        return 'Usuário não encontrado!';
+      case DomainError.wrongPassword:
+        return 'Senha inválida!';
       default:
-        return 'Erro desconhecido';
+        return 'Falha ao logar!';
     }
   }
 }

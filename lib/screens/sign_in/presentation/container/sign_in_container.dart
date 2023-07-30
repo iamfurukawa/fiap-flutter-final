@@ -22,9 +22,7 @@ class SignInContainer extends BlocBuilder<SignInCubit, SignInCubitState> {
                 );
               case SignInCubitStateStatus.error:
                 return SignInError(
-                  errorMessage: state.error != null
-                      ? '\n\nErro retornado: $state.error'
-                      : '',
+                  errorMessage: state.error ?? "",
                 );
             }
           },

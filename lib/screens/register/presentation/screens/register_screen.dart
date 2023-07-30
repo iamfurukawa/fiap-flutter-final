@@ -98,7 +98,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   return;
                 }
 
-                context.read<RegisterCubit>().register(_passwordController.text, _emailController.text);
+                context.read<RegisterCubit>().register(_emailController.text, _passwordController.text);
               },
               child: const Text('Cadastrar'),
             ),

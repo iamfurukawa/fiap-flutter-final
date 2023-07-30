@@ -76,8 +76,7 @@ class SignInScreen extends StatelessWidget {
                   return;
                 }
 
-                context.read<SignInCubit>()
-                    .signIn(_passwordController.text, _emailController.text);
+                context.read<SignInCubit>().signIn(_emailController.text, _passwordController.text);
               },
               child: const Text('Entrar'),
             ),

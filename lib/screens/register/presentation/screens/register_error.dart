@@ -29,7 +29,7 @@ class RegisterError extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Text(
-              'Ops, parece que ocorreu um erro ao logar!$errorMessage',
+              'Ops, parece que ocorreu uma falha\n\nErro retornado: $errorMessage',
               style: const TextStyle(
                 fontSize: 18,
               )

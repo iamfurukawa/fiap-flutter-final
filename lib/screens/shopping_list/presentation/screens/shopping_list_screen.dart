@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_list/screens/shopping_list/presentation/bloc/shopping_list_cubit.dart';
@@ -26,6 +27,7 @@ class ShoppingListScreen extends StatelessWidget {
             backgroundColor: ColorsSystem.background,
             leading: IconButton(
               onPressed: () {
+                FirebaseAuth.instance.signOut();
                 Navigator.pushReplacementNamed(context, SignInContainer.routeName);
               },
               icon: const Icon(

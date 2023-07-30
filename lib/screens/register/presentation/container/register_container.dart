@@ -21,9 +21,7 @@ class RegisterContainer extends BlocBuilder<RegisterCubit, RegisterCubitState> {
           );
         case RegisterCubitStateStatus.error:
           return RegisterError(
-            errorMessage: state.error != null
-                ? '\n\nErro retornado: $state.error'
-                : '',
+            errorMessage: state.error ?? "",
           );
       }
     },
