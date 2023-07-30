@@ -21,9 +21,7 @@ class ShoppingListContainer extends BlocBuilder<ShoppingListCubit, ShoppingListC
           return ShoppingListEdit();
         case ShoppingListCubitStateStatus.error:
           return ShoppingListError(
-            errorMessage: state.error != null
-                ? '\n\nErro retornado: $state.error'
-                : '',
+            errorMessage: state.error ?? "",
           );
       }
     },

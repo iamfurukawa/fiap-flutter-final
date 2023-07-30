@@ -57,10 +57,11 @@ class ShoppingListCubit extends Cubit<ShoppingListCubitState> {
     try {
       var updatedItems = [...state.shoppingList.items];
       updatedItems.removeWhere((item) => item.uuid == uuid);
+      var updatedShoppingList = await shoppingListService.save(ShoppingListEntity(items: updatedItems));
 
       emit(state.copyWith(
         status: ShoppingListCubitStateStatus.ok,
-        shoppingList: ShoppingListEntity(items: updatedItems),
+        shoppingList: updatedShoppingList,
       ));
     } on DomainError catch (error) {
       emit(state.copyWith(
@@ -79,9 +80,11 @@ class ShoppingListCubit extends Cubit<ShoppingListCubitState> {
         return item;
       }).toList();
 
+      var updatedShoppingList = await shoppingListService.save(ShoppingListEntity(items: updatedItems));
+
       emit(state.copyWith(
         status: ShoppingListCubitStateStatus.ok,
-        shoppingList: ShoppingListEntity(items: updatedItems),
+        shoppingList: updatedShoppingList,
       ));
     } on DomainError catch (error) {
       emit(state.copyWith(
@@ -90,7 +93,7 @@ class ShoppingListCubit extends Cubit<ShoppingListCubitState> {
     }
   }
 
-  void toogleMark(String uuid) {
+  void toogleMark(String uuid) async {
     try {
       var updatedItems = state.shoppingList.items.map((item) {
         if (item.uuid == uuid) item.check = !item.check;
@@ -98,9 +101,11 @@ class ShoppingListCubit extends Cubit<ShoppingListCubitState> {
       })
       .toList();
 
+      var updatedShoppingList = await shoppingListService.save(ShoppingListEntity(items: updatedItems));
+
       emit(state.copyWith(
         status: ShoppingListCubitStateStatus.ok,
-        shoppingList: ShoppingListEntity(items: updatedItems),
+        shoppingList: updatedShoppingList,
       ));
     } on DomainError catch (error) {
       emit(state.copyWith(

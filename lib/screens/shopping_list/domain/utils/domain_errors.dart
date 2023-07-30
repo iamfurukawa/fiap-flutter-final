@@ -1,19 +1,12 @@
 enum DomainError {
-  notFound,
-  timeOut,
-  serverError,
-  unexpected;
+  errorOnSave;
 
   String get description {
     switch (this) {
-      case DomainError.notFound:
-        return 'Url não existe';
-      case DomainError.timeOut:
-        return 'Tempo de conexão esgotado';
-      case DomainError.serverError:
-        return 'Falha no servidor';
+      case DomainError.errorOnSave:
+        return 'Erro na sincronização com o Firestore!';
       default:
-        return 'Erro desconhecido';
+        return 'Erro desconhecido!';
     }
   }
 }
